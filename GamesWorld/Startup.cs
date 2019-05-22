@@ -30,6 +30,10 @@ namespace GamesWorld
         {
 
             loggerFactory.AddConsole();
+            app.UseDeveloperExceptionPage();
+            app.UseStatusCodePages();
+            app.UseStaticFiles();
+            app.UseMvcWithDefaultRoute();
 
             if (env.IsDevelopment())
             {
