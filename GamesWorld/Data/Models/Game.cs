@@ -19,11 +19,11 @@ namespace GamesWorld.Data.Models
 
         public int LeftOver { get; set; }
 
-        public int ConsoleID { get; set; }
+        public int GameConsoleID { get; set; }
 
         public int GenreID { get; set; }
 
-        public virtual Console Console { get; set; }
+        public virtual GameConsole GameConsole { get; set; }
 
         public virtual Genre Genre { get; set; }
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GamesWorld.Data.Models
 {
-    public class Console
+    public class Konsole
     {
         public int ConsoleID { get; set; }
 
