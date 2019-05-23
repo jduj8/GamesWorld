@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace GamesWorld.Data.Interfaces
 {
-    public interface IGameRepository
+    public interface IProductRepository
     {
-        IEnumerable<Game> Games { get; set; }
+        IEnumerable<Product> Products { get; set; }
+
+        Product GetProductByID(int productID);
     }
 }

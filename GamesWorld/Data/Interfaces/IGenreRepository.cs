@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace GamesWorld.Data.Interfaces
 {
-    public interface IGameRepository
+    public interface IGenreRepository
     {
-        IEnumerable<Game> Games { get; set; }
+        IEnumerable<Genre> Genres { get; set; }
     }
 }
