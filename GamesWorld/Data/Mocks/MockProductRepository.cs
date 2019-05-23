@@ -21,7 +21,7 @@ namespace GamesWorld.Data.Mocks
                 {
                     new Product
                     {
-                        Game = _repositoryGame.Games.First(),
+                        Game = _repositoryGame.Games.ElementAt(1),
                         GameConsole = _gameConsoleRepository.GameConsoles.First(),
                         Price = 19.9M,
                         InStock = true,
@@ -44,6 +44,16 @@ namespace GamesWorld.Data.Mocks
                         Price = 21.4M,
                         InStock = true,
                         ImageUrl = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6255/6255133_sd.jpg;maxHeight=640;maxWidth=550"
+                    },
+
+                    new Product
+                    {
+                        Game = _repositoryGame.Games.ElementAt(2),
+                        GameConsole = _gameConsoleRepository.GameConsoles.First(),
+                        Price = 50.60M,
+                        InStock = true,
+                        ImageUrl = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5887/5887114_sd.jpg;maxHeight=640;maxWidth=550"
+
                     }
                 };
             }

@@ -1,0 +1,20 @@
+﻿@model ProductListViewModel
+
+<h1>Order games here</h1>
+
+<h2>@Model.CurrentGameConsole games</h2>
+
+@foreach(Product product in Model.Products)
+{
+    <div class="col-sm-4 col-lg-4 col-md-4">
+       <div class="thumbnail" style="background-color:lavender;">
+           <img src="@product.ImageUrl" alt="" />
+           <div class="caption">
+               <h3 class="pull-right">@product.Price.ToString("c")</h3>
+               <h3>
+                   @product.Game.Name
+               </h3>
+           </div>
+       </div>
+    </div>
+}
