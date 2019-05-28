@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using GamesWorld.Data;
 using GamesWorld.Data.Interfaces;
 using GamesWorld.Data.Mocks;
+using GamesWorld.Data.Models;
+using GamesWorld.Data.Repostiories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -34,15 +36,15 @@ namespace GamesWorld
         {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IGenreRepository, MockGenreRepository>();
-            services.AddTransient<IGameConsoleRepository, MockGameConsoleRepository>();
-            services.AddTransient<IGameRepository, MockGameRepository>();
-            services.AddTransient<IProductRepository, MockProductRepository>();
+            services.AddTransient<IGenreRepository, GenreRepository>();
+            services.AddTransient<IGameConsoleRepository, GameConsoleRepository>();
+            services.AddTransient<IGameRepository, GameRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
         {
 
             loggerFactory.AddConsole();
@@ -50,6 +52,8 @@ namespace GamesWorld
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+
+            DbInitializer.Seed(serviceProvider.GetRequiredService<AppDbContext>());
 
             if (env.IsDevelopment())
             {

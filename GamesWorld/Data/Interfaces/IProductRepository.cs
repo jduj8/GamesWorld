@@ -8,7 +8,7 @@ namespace GamesWorld.Data.Interfaces
 {
     public interface IProductRepository
     {
-        IEnumerable<Product> Products { get; set; }
+        IEnumerable<Product> Products { get; }
 
         Product GetProductByID(int productID);
     }

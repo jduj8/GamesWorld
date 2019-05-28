@@ -8,6 +8,6 @@ namespace GamesWorld.Data.Interfaces
 {
     public interface IGenreRepository
     {
-        IEnumerable<Genre> Genres { get; set; }
+        IEnumerable<Genre> Genres { get; }
     }
 }

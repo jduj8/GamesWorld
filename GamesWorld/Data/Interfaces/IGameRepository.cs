@@ -8,6 +8,6 @@ namespace GamesWorld.Data.Interfaces
 {
     public interface IGameRepository
     {
-        IEnumerable<Game> Games { get; set; }
+        IEnumerable<Game> Games { get; }
     }
 }

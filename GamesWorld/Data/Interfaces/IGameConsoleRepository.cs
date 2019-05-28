@@ -8,6 +8,6 @@ namespace GamesWorld.Data.Interfaces
 {
     public interface IGameConsoleRepository
     {
-        IEnumerable<GameConsole> GameConsoles { get; set; }
+        IEnumerable<GameConsole> GameConsoles { get; }
     }
 }

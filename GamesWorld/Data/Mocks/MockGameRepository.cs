@@ -36,7 +36,6 @@ namespace GamesWorld.Data.Mocks
                         Name = "Hitman 2",
                         Description = "Make the world your weapon. Become Agent 47, and dismantle the elusive Shadow Client's militia. Think deadly as you travel the globe to take down your targets in six new sandbox environments, improvise each assassination, and explore the franchise's advanced installment.",
                         Genre = _genreRepository.Genres.First()
-
                     }
                 };
             }
