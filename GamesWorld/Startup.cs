@@ -58,7 +58,7 @@ namespace GamesWorld
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
 
             DbInitializer.Seed(serviceProvider.GetRequiredService<AppDbContext>());
 
@@ -76,6 +76,10 @@ namespace GamesWorld
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "filterByConsole",
+                    template: "{controller=Product}/{action=List}/{console?}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

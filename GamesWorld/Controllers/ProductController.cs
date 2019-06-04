@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GamesWorld.Data.Interfaces;
+using GamesWorld.Data.Models;
 using GamesWorld.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,15 +26,51 @@ namespace GamesWorld.Controllers
             _genreRepository = genreRepository;
         }
 
-        public ViewResult List()
+        public ViewResult List(string console)
         {
-            ProductListViewModel productListViewModel = new ProductListViewModel();
+            string _console = console;
+            IEnumerable<Product> products;
 
-            productListViewModel.Products = _productRepository.Products;
-            productListViewModel.CurrentGameConsole = "PS4";
+            string currentConsole = string.Empty;
+
+            if (string.IsNullOrEmpty(console))
+            {
+                products = _productRepository.Products.OrderBy(p => p.ProductID);
+                currentConsole = "All console";
+            }
+
+            else
+            {
+                if (string.Equals("PS4", _console, StringComparison.OrdinalIgnoreCase))
+                {
+                    products = _productRepository.Products.Where(p => p.GameConsole.GameConsoleName.Equals("PS4")).OrderBy(p => p.ProductID);
+                }
+
+                else if (string.Equals("PC", _console, StringComparison.OrdinalIgnoreCase))
+                {
+                    products = _productRepository.Products.Where(p => p.GameConsole.GameConsoleName.Equals("PC")).OrderBy(p => p.ProductID);
+                }
+
+                else
+                {
+                    products = _productRepository.Products.Where(p => p.GameConsole.GameConsoleName.Equals("XBOX")).OrderBy(p => p.ProductID);
+                }
+
+                currentConsole = console;
+            }
+
+            ProductListViewModel productListViewModel = new ProductListViewModel()
+            {
+                Products = products,
+                CurrentGameConsole = currentConsole
+            };
+
+
 
             return View(productListViewModel);
         }
+
+
         // GET: /<controller>/
         public IActionResult Index()
         {

@@ -17,7 +17,7 @@ namespace GamesWorld.Data.Repostiories
             _appDbContext = appDbContext;
         }
 
-        public IEnumerable<Product> Products => _appDbContext.Products.Include(g => g.Game);
+        public IEnumerable<Product> Products => _appDbContext.Products.Include(g => g.Game).Include(c => c.GameConsole);
         
 
         public Product GetProductByID(int productID)
