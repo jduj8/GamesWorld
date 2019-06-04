@@ -5,14 +5,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GamesWorld.Models;
+using GamesWorld.Data.Interfaces;
+using GamesWorld.ViewModels;
 
 namespace GamesWorld.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IProductRepository _productRepository;
+
+        public HomeController(IProductRepository productRepository)
         {
-            return View();
+            _productRepository = productRepository;
+        }
+
+        public ViewResult Index()
+        {
+            var homeViewModel = new HomeViewModel()
+            {
+                SomeGames = _productRepository.Products.OrderByDescending(p => p.ProductID).Take(3).ToList()
+            };
+
+            return View(homeViewModel);
         }
 
         public IActionResult About()
