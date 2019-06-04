@@ -9,6 +9,7 @@ using GamesWorld.Data.Models;
 using GamesWorld.Data.Repostiories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,7 +41,12 @@ namespace GamesWorld
             services.AddTransient<IGameConsoleRepository, GameConsoleRepository>();
             services.AddTransient<IGameRepository, GameRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => Cart.GetCart(sp)); //object which is associated with a request
             services.AddMvc();
+
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +57,7 @@ namespace GamesWorld
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvcWithDefaultRoute();
 
             DbInitializer.Seed(serviceProvider.GetRequiredService<AppDbContext>());
