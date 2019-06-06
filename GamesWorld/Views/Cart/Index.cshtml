@@ -36,7 +36,7 @@
             </tr>
         </tfoot>
     </table>
-    @*
+    
     <div class="text-right">
         <div class="btn-group ">
             <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out</a>
@@ -45,13 +45,13 @@
                     Add more games<span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a asp-controller="Product" asp-action="List" asp-route-category="PS2">PS2</a></li>
-                    <li><a asp-controller="Product" asp-action="List" asp-route-category="PC">PC</a></li>
-                    <li><a asp-controller="Product" asp-action="List" asp-route-category="XBOX">XBOX</a></li>
+                    <li><a asp-controller="Product" asp-action="List" asp-route-console="PS2">PS2</a></li>
+                    <li><a asp-controller="Product" asp-action="List" asp-route-console="PC">PC</a></li>
+                    <li><a asp-controller="Product" asp-action="List" asp-route-console="XBOX">XBOX</a></li>
 
                 </ul>
             </a>
         </div>
-        *@
+        
     </div>
 </div>

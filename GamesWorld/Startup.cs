@@ -43,10 +43,11 @@ namespace GamesWorld
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => Cart.GetCart(sp)); //object which is associated with a request
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddMvc();
-
-            services.AddMemoryCache();
+       
             services.AddSession();
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

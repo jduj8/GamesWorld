@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,9 +30,9 @@ namespace GamesWorld.Data.Models
 
             var context = services.GetService<AppDbContext>();
 
-            string cartID = session.GetString("CartId") ?? Guid.NewGuid().ToString();
-            session.SetString("cartID", cartID);
-
+            string cartID = session.GetString("CartID") ?? Guid.NewGuid().ToString();
+            session.SetString("CartID", cartID);
+            Debug.WriteLine(cartID);
             return new Cart(context) { CartID = cartID };
         }
 
@@ -51,7 +52,12 @@ namespace GamesWorld.Data.Models
                     Amount = 1
                 };
 
+                Debug.WriteLine(cartItem.Product.Price);
+                Debug.WriteLine(_appDbContext.CartItems.Count());
+
                 _appDbContext.CartItems.Add(cartItem);
+
+                
             }
 
             else
@@ -60,6 +66,7 @@ namespace GamesWorld.Data.Models
             }
 
             _appDbContext.SaveChanges();
+            Debug.WriteLine(_appDbContext.CartItems.Count());
         }
 
         public int RemoveFromCart(Product product)
@@ -91,10 +98,13 @@ namespace GamesWorld.Data.Models
 
         public List<CartItem> GetItemsInCart()
         {
+            Debug.WriteLine("Get items");
+            Debug.WriteLine(_appDbContext.CartItems.Count());
+            Debug.WriteLine(CartID);
             return CartItems ?? (
                     CartItems = _appDbContext.CartItems.Where(
                         c => c.CartID == CartID).
-                        Include(s => s.Product).
+                        Include(s => s.Product).Include(g => g.Product.Game).
                         ToList());
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using GamesWorld.Data.Interfaces;
@@ -27,6 +28,7 @@ namespace GamesWorld.Controllers
         {
             var items = _cart.GetItemsInCart();
             _cart.CartItems = items;
+            ViewBag.Product = items.Count;
 
             var cartViewModel = new CartViewModel()
             {
@@ -37,10 +39,10 @@ namespace GamesWorld.Controllers
             return View(cartViewModel);
         }
 
-        public RedirectToActionResult AddToShoppingCart(int productID)
+        public RedirectToActionResult AddToCart(int productID)
         {
             var selectedProduct = _productRepository.Products.FirstOrDefault(p => p.ProductID == productID);
-
+            Debug.WriteLine("AAAAAsdaaaaaaaaaaaaaaaaaaaaaaaa", selectedProduct.Game.Name);
             if (selectedProduct != null)
             {
                 _cart.AddToCart(selectedProduct, 1);
