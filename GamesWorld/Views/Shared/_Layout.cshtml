@@ -35,6 +35,7 @@
                     <li><a asp-area="" asp-controller="Contact" asp-action="Index">Contact</a></li>
                     @await Component.InvokeAsync("CartSummary")
                 </ul>
+                @await Html.PartialAsync("LoginPartial")
             </div>
         </div>
     </nav>
